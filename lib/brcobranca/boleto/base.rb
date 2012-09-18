@@ -25,6 +25,8 @@ module Brcobranca
       attr_accessor :data_processamento
       # <b>REQUERIDO</b>: Número de dias a vencer
       attr_accessor :dias_vencimento
+      # <b>OPCIONAL</b>: Data de vencimento do boleto
+      attr_accessor :_data_vencimento
       # <b>REQUERIDO</b>: Quantidade de boleto(padrão = 1)
       attr_accessor :quantidade
       # <b>REQUERIDO</b>: Valor do boleto
@@ -150,6 +152,7 @@ module Brcobranca
       # @return [Date]
       # @raise [ArgumentError] Caso {#data_documento} esteja em branco.
       def data_vencimento
+        return self._data_vencimento if self._data_vencimento
         raise ArgumentError, "data_documento não pode estar em branco." unless self.data_documento
         return self.data_documento unless self.dias_vencimento
         (self.data_documento + self.dias_vencimento.to_i)

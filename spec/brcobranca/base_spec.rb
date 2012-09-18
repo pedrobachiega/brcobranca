@@ -180,6 +180,14 @@ module Brcobranca #:nodoc:[all]
         boleto_novo.respond_to?(:to).should be_true
       end
 
+      it "Usar _data_vencimento quando setado" do
+        x = rand(30)
+        vencimento = Date.today + x
+        boleto_novo = Brcobranca::Boleto::Base.new(@valid_attributes.merge(:_data_vencimento => vencimento, :dias_vencimento => (x+5)))
+        boleto_novo.dias_vencimento.should eql(x+5)
+        boleto_novo.data_vencimento.should eql(vencimento)
+      end
+
     end
   end
 end
